@@ -1,6 +1,7 @@
 {
   "name": "test-ci",
   "version": "0.0.1",
+  "private": true,
   "description": "",
   "dependencies": {
     "express": "^5.2.1"
