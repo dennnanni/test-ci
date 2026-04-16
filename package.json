@@ -1,0 +1,8 @@
+{
+  "name": "test-ci",
+  "version": "0.0.1",
+  "description": "",
+  "dependencies": {
+    "express": "^5.2.1"
+  }
+}
