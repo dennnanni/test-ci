@@ -19,7 +19,7 @@ app.get('/api/health', (req: Request, res: Response) => {
 });
 
 app.get('/api/message', (req: Request, res: Response) => {
-    res.json({ text: 'Hello from your Express Backend!' });
+    res.json({ text: 'Questo è un test di modifica' });
 });
 
 // Database connection
