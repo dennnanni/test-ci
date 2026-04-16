@@ -1,0 +1,57 @@
+name: Pull Request Checks
+
+on:
+  pull_request:
+    branches: ["master", "main"]
+
+jobs:
+  lint-and-test:
+    name: Code Quality and Tests
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "lts/*"
+          cache: "npm"
+          cache-dependency-path: |
+            backend/package-lock.json
+            frontend/package-lock.json
+
+      # Backend Checks
+      - name: Install Backend Dependencies
+        working-directory: ./backend
+        run: npm ci
+
+      - name: Backend Audit
+        working-directory: ./backend
+        run: npm audit --audit-level=high || true
+      
+      - name: Backend Lint
+        working-directory: ./backend
+        run: npm run lint
+        
+      - name: Backend Test
+        working-directory: ./backend
+        run: npm run test
+
+      # Frontend Checks
+      - name: Install Frontend Dependencies
+        working-directory: ./frontend
+        run: npm ci
+        
+      - name: Frontend Audit
+        working-directory: ./frontend
+        run: npm audit --audit-level=high || true
+
+      - name: Frontend Lint
+        working-directory: ./frontend
+        run: npm run lint
+        
+      - name: Frontend Test
+        working-directory: ./frontend
+        run: npm run test

@@ -1,24 +1,24 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref } from 'vue';
 
-const backendMessage = ref<string>('Click the button to fetch data from the backend!')
-const isLoading = ref<boolean>(false)
+const backendMessage = ref<string>('Click the button to fetch data from the backend!');
+const isLoading = ref<boolean>(false);
 
 const handleFetch = async () => {
-  isLoading.value = true
+  isLoading.value = true;
   try {
     // The request goes to exactly '/api/message'
     // Vite intercepts this and forwards it to http://localhost:3000/api/message
     // (thanks to the proxy configured in vite.config.ts)
-    const res = await fetch('/api/message')
-    const data = await res.json()
-    backendMessage.value = data.text
+    const res = await fetch('/api/message');
+    const data = await res.json();
+    backendMessage.value = data.text;
   } catch (error) {
-    backendMessage.value = 'Error connecting to backend API.'
+    backendMessage.value = 'Error connecting to backend API.';
   } finally {
-    isLoading.value = false
+    isLoading.value = false;
   }
-}
+};
 </script>
 
 <template>
@@ -29,12 +29,12 @@ const handleFetch = async () => {
     </div>
 
     <h1>MEVN Template</h1>
-    
+
     <div class="card">
       <button @click="handleFetch" :disabled="isLoading">
         {{ isLoading ? 'Loading...' : 'Fetch from Backend' }}
       </button>
-      
+
       <p class="message-box">
         Server Response: <strong>{{ backendMessage }}</strong>
       </p>
@@ -80,7 +80,9 @@ button {
   background-color: #646cff;
   color: white;
   cursor: pointer;
-  transition: border-color 0.25s, background-color 0.25s;
+  transition:
+    border-color 0.25s,
+    background-color 0.25s;
 }
 button:hover {
   background-color: #535bf2;

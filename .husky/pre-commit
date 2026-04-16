@@ -1,0 +1,7 @@
+# Esegue i controlli nel backend
+npm run lint --prefix backend
+npm run test --prefix backend
+
+# Esegue i controlli nel frontend
+npm run lint --prefix frontend
+npm run test --prefix frontend
