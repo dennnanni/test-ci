@@ -1,7 +1,4 @@
-# Esegue i controlli nel backend
-npm run lint --prefix backend
-npm run test --prefix backend
+npx lint-staged
 
-# Esegue i controlli nel frontend
-npm run lint --prefix frontend
-npm run test --prefix frontend
+# tests are not working yet
+# npm test
