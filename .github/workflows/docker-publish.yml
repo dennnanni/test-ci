@@ -71,6 +71,9 @@ jobs:
           - name: frontend
             context: .
             dockerfile: ./frontend/Dockerfile
+          - name: ext-api-service
+            context: ./ext-api-service
+            dockerfile: ./ext-api-service/Dockerfile
 
     steps:
       - name: Checkout repository

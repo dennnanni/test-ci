@@ -18,8 +18,24 @@ app.get("/api/health", (req: Request, res: Response) => {
   res.json({ status: "ok", db: mongoose.connection.readyState });
 });
 
-app.get("/api/message", (req: Request, res: Response) => {
-  res.json({ text: "Questo è un test di modifica" });
+app.get("/api/message", async (req: Request, res: Response) => {
+  try {
+    const extApiRes = await fetch("http://ext-api-service:8080/api/mock");
+    if (extApiRes.ok) {
+      const data = await extApiRes.json();
+      res.json({
+        text: `Success: Backend received "${data.message}" from external service.`,
+      });
+    } else {
+      res.json({
+        text:
+          "Error: Call to external service failed with status " +
+          extApiRes.status,
+      });
+    }
+  } catch {
+    res.json({ text: "Error: Could not reach external service." });
+  }
 });
 
 // Database connection

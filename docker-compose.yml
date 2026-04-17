@@ -22,6 +22,14 @@ services:
     depends_on:
       - mongodb
 
+  ext-api-service:
+    build:
+      context: ./ext-api-service
+      dockerfile: Dockerfile
+    container_name: mevn_ext_api_service
+    ports:
+      - "8081:8080"
+
   frontend:
     build:
       context: .
