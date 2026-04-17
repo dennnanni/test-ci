@@ -9,6 +9,16 @@
   "scripts": {
     "prepare": "husky"
   },
+  "lint-staged": {
+    "backend/**/*.{ts,js}": [
+      "npm run format --prefix backend",
+      "npm run lint --prefix backend"
+    ],
+    "frontend/**/*.{ts,tsx,vue,js,cjs,mjs}": [
+      "npm run format --prefix frontend",
+      "npm run lint --prefix frontend"
+    ]
+  },
   "devDependencies": {
     "@commitlint/cli": "^20.5.0",
     "@commitlint/config-conventional": "^20.5.0",

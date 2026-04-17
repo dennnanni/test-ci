@@ -1,7 +1,9 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref } from "vue";
 
-const backendMessage = ref<string>('Click the button to fetch data from the backend!');
+const backendMessage = ref<string>(
+  "Click the button to fetch data from the backend!",
+);
 const isLoading = ref<boolean>(false);
 
 const handleFetch = async () => {
@@ -10,11 +12,11 @@ const handleFetch = async () => {
     // The request goes to exactly '/api/message'
     // Vite intercepts this and forwards it to http://localhost:3000/api/message
     // (thanks to the proxy configured in vite.config.ts)
-    const res = await fetch('/api/message');
+    const res = await fetch("/api/message");
     const data = await res.json();
     backendMessage.value = data.text;
-  } catch (error) {
-    backendMessage.value = 'Error connecting to backend API.';
+  } catch {
+    backendMessage.value = "Error connecting to backend API.";
   } finally {
     isLoading.value = false;
   }
@@ -32,7 +34,7 @@ const handleFetch = async () => {
 
     <div class="card">
       <button @click="handleFetch" :disabled="isLoading">
-        {{ isLoading ? 'Loading...' : 'Fetch from Backend' }}
+        {{ isLoading ? "Loading..." : "Fetch from Backend" }}
       </button>
 
       <p class="message-box">
