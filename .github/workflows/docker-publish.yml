@@ -66,10 +66,10 @@ jobs:
       matrix:
         include:
           - name: backend
-            context: ./backend
+            context: .
             dockerfile: ./backend/Dockerfile
           - name: frontend
-            context: ./frontend
+            context: .
             dockerfile: ./frontend/Dockerfile
 
     steps:

@@ -1,7 +1,7 @@
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect } from "vitest";
 
-describe('Dummy Backend Test', () => {
-  it('should pass if 1 + 1 equals 2', () => {
+describe("Dummy Backend Test", () => {
+  it("should pass if 1 + 1 equals 2", () => {
     expect(1 + 1).toBe(2);
   });
 });
