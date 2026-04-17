@@ -71,9 +71,6 @@ jobs:
           - name: frontend
             context: ./frontend
             dockerfile: ./frontend/Dockerfile
-          - name: nginx
-            context: ./nginx
-            dockerfile: ./nginx/Dockerfile
 
     steps:
       - name: Checkout repository
