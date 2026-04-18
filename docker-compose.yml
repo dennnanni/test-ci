@@ -1,9 +1,7 @@
-version: '3.8'
-
 services:
   mongodb:
     image: mongo:latest
-    container_name: mevn_mongodb
+    container_name: mongodb
     ports:
       - "27017:27017"
     volumes:
@@ -26,7 +24,7 @@ services:
     build:
       context: ./ext-api-service
       dockerfile: Dockerfile
-    container_name: mevn_ext_api_service
+    container_name: ext_api_service
     ports:
       - "8081:8080"
 
