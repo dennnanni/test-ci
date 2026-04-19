@@ -18,7 +18,8 @@ services:
     ports:
       - "3000:3000"
     volumes:
-      - ./backend/src:/app/backend/src
+      - ./backend:/app/backend
+      - /app/backend/node_modules
     depends_on:
       - mongodb
 
@@ -42,10 +43,8 @@ services:
     environment:
       - VITE_BACKEND_URL=http://backend:3000
     volumes:
-      - ./frontend/src:/app/frontend/src
-      - ./frontend/public:/app/frontend/public
-      - ./frontend/index.html:/app/frontend/index.html
-      - ./frontend/vite.config.ts:/app/frontend/vite.config.ts
+      - ./frontend:/app/frontend
+      - /app/frontend/node_modules
     depends_on:
       - backend
 
