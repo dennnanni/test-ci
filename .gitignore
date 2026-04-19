@@ -38,4 +38,5 @@ dist-ssr
 
 # Coverage
 coverage/
+*.out
 .nyc_output/
