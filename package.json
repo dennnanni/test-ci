@@ -11,16 +11,18 @@
     "express": "^5.2.1"
   },
   "scripts": {
-    "prepare": "husky"
+    "prepare": "husky",
+    "test": "npm run test --workspaces --if-present",
+    "test:coverage": "npm run test:coverage --workspaces --if-present",
+    "lint": "eslint . --fix",
+    "lint:check": "eslint .",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
   },
   "lint-staged": {
-    "backend/**/*.{ts,js}": [
-      "npm run format --prefix backend",
-      "npm run lint --prefix backend"
-    ],
-    "frontend/**/*.{ts,tsx,vue,js,cjs,mjs}": [
-      "npm run format --prefix frontend",
-      "npm run lint --prefix frontend"
+    "**/*.{ts,tsx,vue,js,cjs,mjs}": [
+      "prettier --write",
+      "eslint --fix"
     ]
   },
   "devDependencies": {
