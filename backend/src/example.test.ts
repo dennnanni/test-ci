@@ -1,7 +1,39 @@
-import { describe, it, expect } from "vitest";
+import { describe, it, expect, vi } from "vitest";
 
-describe("Dummy Backend Test", () => {
-  it("should pass if 1 + 1 equals 2", () => {
-    expect(1 + 1).toBe(2);
+// Mock express to prevent starting a real server
+vi.mock("express", () => {
+  const appMock = {
+    get: vi.fn(),
+    use: vi.fn(),
+    listen: vi.fn(),
+  };
+  const expressMock = Object.assign(
+    vi.fn(() => appMock),
+    {
+      json: vi.fn(),
+    },
+  );
+  return { default: expressMock };
+});
+
+// Mock mongoose to prevent actual DB connection
+vi.mock("mongoose", () => {
+  return {
+    default: {
+      connect: vi.fn().mockResolvedValue(true),
+      connection: { readyState: 1 },
+    },
+  };
+});
+
+describe("Backend Index Scope", () => {
+  it("should process the index file and register dependencies", async () => {
+    // Import the source file to trigger execution and generate coverage
+    await import("./index");
+
+    const mongoose = (await import("mongoose")).default;
+
+    // Expect the file to have called mongoose.connect
+    expect(mongoose.connect).toHaveBeenCalled();
   });
 });
