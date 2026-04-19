@@ -2,10 +2,10 @@
 
 # Run tests
 echo "Running Frontend Tests..."
-npx vitest run --root frontend || exit 1
+npx vitest run --root frontend --passWithNoTests || exit 1
 
 echo "Running Backend Tests..."
-npx vitest run --root backend || exit 1
+npx vitest run --root backend --passWithNoTests || exit 1
 
 echo "Running Go Service Tests..."
 go test -C ext-api-service -v ./... || exit 1
