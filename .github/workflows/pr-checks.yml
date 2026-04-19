@@ -16,42 +16,36 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "lts/*"
+          node-version: "24"
           cache: "npm"
-          cache-dependency-path: |
-            backend/package-lock.json
-            frontend/package-lock.json
+          cache-dependency-path: package-lock.json
 
-      # Backend Checks
-      - name: Install Backend Dependencies
-        working-directory: ./backend
+      - name: Install Dependencies
         run: npm ci
 
-      - name: Backend Audit
-        working-directory: ./backend
-        run: npm audit --audit-level=high || true
+      # Node.js Workspace Checks (Frontend & Backend)
+      - name: Security Audit
+        run: npm audit --audit-level=high
+
+      - name: Format Check
+        run: npm run format:check
       
-      - name: Backend Lint
-        working-directory: ./backend
-        run: npm run lint
+      - name: Lint Check
+        run: npm run lint:check
         
-      - name: Backend Test
-        working-directory: ./backend
-        run: npm run test
+      - name: Run Tests
+        run: npm test
 
-      # Frontend Checks
-      - name: Install Frontend Dependencies
-        working-directory: ./frontend
-        run: npm ci
-        
-      - name: Frontend Audit
-        working-directory: ./frontend
-        run: npm audit --audit-level=high || true
+      # Go Service Checks
+      - name: Setup Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: "1.24.4"
 
-      - name: Frontend Lint
-        working-directory: ./frontend
-        run: npm run lint
-        
-      - name: Frontend Test
-        working-directory: ./frontend
-        run: npm run test
+      - name: Go Format Check
+        working-directory: ./ext-api-service
+        run: if [ "$(gofmt -s -l . | wc -l)" -gt 0 ]; then echo "Go code is not formatted"; exit 1; fi
+
+      - name: Go Test
+        working-directory: ./ext-api-service
+        run: go test -v ./...
