@@ -14,21 +14,21 @@
     "prepare": "husky",
     "test": "npm run test --workspaces --if-present",
     "test:coverage": "npm run test:coverage --workspaces --if-present",
-    "lint": "eslint . --fix",
-    "lint:check": "eslint .",
     "format": "prettier --write .",
     "format:check": "prettier --check ."
   },
   "lint-staged": {
     "**/*.{ts,tsx,vue,js,cjs,mjs}": [
-      "prettier --write",
-      "eslint --fix"
+      "prettier --write"
     ]
   },
   "devDependencies": {
     "@commitlint/cli": "^20.5.0",
     "@commitlint/config-conventional": "^20.5.0",
-    "eslint-config-prettier": "^10.1.8",
-    "husky": "^9.1.7"
+    "@types/node": "^25.6.0",
+    "@vitest/coverage-v8": "^4.1.4",
+    "husky": "^9.1.7",
+    "prettier": "^3.8.3",
+    "vitest": "^4.1.4"
   }
 }
