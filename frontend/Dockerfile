@@ -2,13 +2,15 @@
 FROM node:22-slim AS builder
 WORKDIR /app
 
+ENV NPM_CONFIG_OMIT=
+
 # Copy root configurations
 COPY package*.json ./
 # Copy workspace configurations
 COPY frontend/package*.json ./frontend/
 
 # Install dependencies
-RUN npm ci --include=optional
+RUN npm ci --include=optional --no-audit --no-fund
 
 # Copy source code for frontend (copy after to avoid running npm install on code changes)
 COPY frontend ./frontend
