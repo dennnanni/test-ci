@@ -8,7 +8,7 @@ COPY package*.json ./
 COPY backend/package*.json ./backend/
 
 # Install dependencies (workspaces support)
-RUN npm install
+RUN npm ci
 
 # Copy source code for backend (copy after to avoid running npm install on code changes)
 COPY backend ./backend

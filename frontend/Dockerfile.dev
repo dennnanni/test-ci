@@ -8,7 +8,7 @@ COPY package*.json ./
 COPY frontend/package*.json ./frontend/
 
 # Install dependencies (workspaces support)
-RUN npm install
+RUN npm ci
 
 # Copy source code for frontend (can be overridden by volumes)
 COPY frontend ./frontend

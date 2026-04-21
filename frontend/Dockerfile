@@ -8,7 +8,7 @@ COPY package*.json ./
 COPY frontend/package*.json ./frontend/
 
 # Install dependencies
-RUN npm install
+RUN npm ci
 
 # Copy source code for frontend (copy after to avoid running npm install on code changes)
 COPY frontend ./frontend
