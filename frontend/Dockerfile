@@ -1,5 +1,5 @@
 # Build stage
-FROM node:24-slim AS builder
+FROM node:22-slim AS builder
 WORKDIR /app
 
 # Copy root configurations
