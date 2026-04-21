@@ -1,5 +1,5 @@
 # Build stage
-FROM node:22-slim AS builder
+FROM --platform=$BUILDPLATFORM node:22-slim AS builder
 WORKDIR /app
 
 ENV NPM_CONFIG_OMIT=
