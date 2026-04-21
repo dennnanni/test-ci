@@ -1,19 +1,13 @@
-FROM node:22-slim
-
+FROM node:24-slim
 WORKDIR /app
 
-# Copy root configurations
 COPY package*.json ./
-# Copy workspace configurations
 COPY backend/package*.json ./backend/
 
-# Install dependencies (workspaces support)
-RUN npm ci --include=optional
+RUN npm ci --no-audit --no-fund
 
-# Copy source code for backend (can be overridden by volumes)
 COPY backend ./backend
 
 EXPOSE 3000
 
-# Start development server
 CMD ["npm", "run", "dev", "-w", "backend"]
